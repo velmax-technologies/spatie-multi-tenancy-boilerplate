@@ -1,0 +1,7 @@
+{
+    "Auth": true,
+    "Tenant": true,
+    "ActivityLog": true,
+    "Settings": true,
+    "User": true
+}
