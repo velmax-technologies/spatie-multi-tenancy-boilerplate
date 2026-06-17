@@ -13,18 +13,31 @@ return new class extends Migration
     {
         Schema::create('tenants', function (Blueprint $table) {
             $table->id();
+            // Business
+            $table->string('business_name')->unique();
+            $table->string('slug')->unique();
+
+            // personal & contact
             $table->string('name');
-            $table->string('username')->unique();
             $table->string('email')->unique()->nullable();
             $table->string('phone')->unique()->nullable();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->string('domain')->unique();
+
+            // Database Configuration
             $table->string('database')->unique();
+            $table->string('database_host')->default('127.0.0.1');
+            $table->integer('database_port')->default(3306);
+            $table->string('database_username')->nullable();
+            $table->string('database_password')->nullable();
+            
+            // status
             $table->boolean('is_active')->default(false);
-            $table->rememberToken();
+            
             $table->timestamps();
             $table->softDeletes();
+
+            $table->index(['is_active']);
         });
     }
 };
+
+// TODO:: Enable hosting database on extanal server

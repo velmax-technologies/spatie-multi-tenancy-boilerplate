@@ -7,9 +7,10 @@ return [
      * put them (manually) here.
      */
     'settings' => [
-        App\Settings\SystemSettings::class,
+        App\Settings\CompanySettings::class,
+        App\Settings\PlatformSettings::class,
+        App\Settings\TenantProvisioningSettings::class,
         App\Settings\TenantSettings::class,
-
     ],
 
     /*
