@@ -27,6 +27,7 @@ return Application::configure(basePath: dirname(__DIR__))
         api: __DIR__.'/../routes/api.php',
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
+        
     )
     ->withMiddleware(function (Middleware $middleware): void {
        $middleware
@@ -48,7 +49,8 @@ return Application::configure(basePath: dirname(__DIR__))
             fn (Request $request) => $request->is('api/*'),
         );
 
-        // MySql Errors
+        // Handle MySql Errors  
+        // TODO:: Handle all myql errors in one function
         $exceptions->render(function (QueryException $e, Request $request) {
             $errorCode = $e->errorInfo[1] ?? null;
             $statusCode = 409;
@@ -65,7 +67,7 @@ return Application::configure(basePath: dirname(__DIR__))
             }  
         });
 
-        // Error Exceptions
+        // Handle Error Exceptions
         $exceptions->render(function (Throwable $e, $request) {
             $http = match (true) {
                 $e instanceof ValidationException => Messages::ERROR["UNPROCESSABLE"],
@@ -87,16 +89,17 @@ return Application::configure(basePath: dirname(__DIR__))
                 || $e instanceof ModelNotFoundException
                 || $e instanceof RoleDoesNotExist
             ) {
-
-                return ApiResponseFormatTrait::jsonResponse(
-                    ApiStatus::ERROR,
-                    $http["CODE"],
-                    $http["SHORT"],
-                     [
-                        "general_error_message" =>  $http["LONG"],
-                        "exact_error_message" =>  $e->getMessage(),
-                    ]
-                );
+                if ($request->user('sanctum')) {
+                    return ApiResponseFormatTrait::jsonResponse(
+                        ApiStatus::ERROR,
+                        $http["CODE"],
+                        $http["SHORT"],
+                        [
+                            "general_error_message" =>  $http["LONG"],
+                            "exact_error_message" =>  $e->getMessage(),
+                        ]
+                    );
+                }
             }
 
             return null; // Let Laravel handle other exceptions

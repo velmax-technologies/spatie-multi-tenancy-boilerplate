@@ -12,10 +12,6 @@ class PlatformSettings extends Settings
 
     public string $maintenance_message;
 
-    public bool $allow_registration;
-
-    public bool $allow_trial;
-
     public int $trial_days;
 
     public int $default_plan_id;

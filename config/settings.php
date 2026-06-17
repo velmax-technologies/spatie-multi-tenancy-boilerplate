@@ -9,6 +9,7 @@ return [
     'settings' => [
         App\Settings\CompanySettings::class,
         App\Settings\PlatformSettings::class,
+        App\Settings\PlatformFeatureSettings::class,
         App\Settings\TenantProvisioningSettings::class,
         App\Settings\TenantSettings::class,
     ],

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
 
 class UserSeeder extends Seeder
 {
@@ -20,7 +21,11 @@ class UserSeeder extends Seeder
             'phone' => '0708222536',
         ]);
 
-        $user->assignRole('super_admin');
+        $user->assignRole([
+            Role::findByName('super-admin', 'sanctum'),
+            Role::findByName('super-admin', 'web'),
+        ]);
+
     
     }
 }

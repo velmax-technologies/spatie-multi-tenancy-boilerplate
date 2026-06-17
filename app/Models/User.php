@@ -26,7 +26,7 @@ class User extends Authenticatable
     use HasRoles;
     use HasActivityLoggerTrait;
 
-    protected string $guard_name = 'sanctum';
+    protected array $guard_name = ['sanctum', 'web'];
     
     /**
      * Get the attributes that should be cast.
