@@ -9,6 +9,6 @@ return new class extends SettingsMigration
         $this->migrator->add('tenant_provisioning.tenant_db_prefix', 'tenant_');
         $this->migrator->add('tenant_provisioning.auto_create_database', true);
         $this->migrator->add('tenant_provisioning.auto_create_admin', true);
-        
+        $this->migrator->add('tenant_provisioning.multi_branch', true);        
     }
 };

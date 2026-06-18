@@ -8,8 +8,6 @@ class CompanySettings extends Settings
 {
     public string $company_name;
 
-    public string $company_registration;
-
     public string $tax_number;
 
     public string $emai;
@@ -23,15 +21,6 @@ class CompanySettings extends Settings
     public string $logo;
 
     public string $favicon;
-
-    public string $timezone;
-
-    public string $currency;
-
-    public string $date_format;
-
-
-
 
     public static function group(): string
     {

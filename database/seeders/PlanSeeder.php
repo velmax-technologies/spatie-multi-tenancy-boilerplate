@@ -14,9 +14,22 @@ class PlanSeeder extends Seeder
     public function run(): void
     {
         Plan::create([
+            'name' => 'Trial',
+            'code' => 'trial',
+            'price' => 0,
+            'users_limit' => 3,
+            'branches_limit' => 1,
+            'features' => [
+                'inventory',
+                'sales',
+                'reports'
+            ],
+        ]);
+
+        Plan::create([
             'name' => 'Starter',
             'code' => 'starter',
-            'price' => 199,
+            'price' => 2000,
             'users_limit' => 5,
             'branches_limit' => 1,
             'features' => [
@@ -29,7 +42,7 @@ class PlanSeeder extends Seeder
         Plan::create([
             'name' => 'Professional',
             'code' => 'pro',
-            'price' => 499,
+            'price' => 5000,
             'users_limit' => 20,
             'branches_limit' => 5,
             'features' => [
@@ -41,4 +54,6 @@ class PlanSeeder extends Seeder
             ],
         ]);
     }
+
+    // TODO:: Advance plans seeder to use arrays iteration
 }

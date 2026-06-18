@@ -6,7 +6,7 @@ use Closure;
 use App\Enums\ApiStatus;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Traits\ApiResponseFormat;
+use App\Traits\ApiResponseFormatTrait;
 use Symfony\Component\HttpFoundation\Response;
 
 class RoleMiddleware
@@ -24,7 +24,7 @@ class RoleMiddleware
                         ->replace('_', ' ')
                         ->title();
             $error_message = "Unauthorized. $role rights required!";
-            return ApiResponseFormat::jsonResponse(
+            return ApiResponseFormatTrait::jsonResponse(
                 ApiStatus::ERROR,
                 403,
                 'Unauthorized!',
