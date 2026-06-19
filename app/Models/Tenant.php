@@ -11,7 +11,7 @@ use Spatie\Multitenancy\Models\Tenant as BaseTenant;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 
-#[Fillable(['business_name', 'slug', 'name', 'database', 'database_host', 'database_port', 'database_username', 'database_password', 'email', 'phone', 'is_active'])]
+#[Fillable(['business_name', 'slug', 'owner_name','username', 'database', 'database_host', 'database_port', 'database_username', 'subdomain', 'database_password', 'email', 'phone', 'is_active'])]
 
 class Tenant extends BaseTenant
 {

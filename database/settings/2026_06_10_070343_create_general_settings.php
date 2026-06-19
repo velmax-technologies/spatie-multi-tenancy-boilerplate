@@ -12,5 +12,7 @@ return new class extends SettingsMigration
         $this->migrator->add('general.date_format', '');
         $this->migrator->add('general.default_plan_id', 0);
         $this->migrator->add('general.theme', "light");
+        $this->migrator->add('general.workspace_host', "tenancy.local");
+
     }
 };

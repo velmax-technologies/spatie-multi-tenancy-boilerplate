@@ -28,19 +28,15 @@ class UserRequest extends FormRequest
             $rules['password'] = 'required|string|min:8|confirmed';
         }
         if ($requetMethod === 'PUT' || $requetMethod === 'PATCH') {
-            
-            //Rule::unique('users', 'username')->ignore($this->route('user'));
-
             // Define validation rules for user update
             $rules['name'] = 'sometimes|required|string|min:6|max:255';
-            $rules['username'] = 'sometimes|required|string|min:3|max:255|alpha_num|unique:users,username,' . $this->route('user');
+            // $rules['username'] = 'sometimes|required|string|min:3|max:255|alpha_num|unique:users,username,' . $this->route('user');
             $rules['email'] = 'sometimes|required|email|max:255|unique:users,email,' . $this->route('user');
             $rules['phone'] = 'nullable|string|max:15';
         }
        
         // Common rules for both creation and update
         $rules['is_active'] = 'sometimes|boolean';
-        $rules['is_super_admin'] = 'sometimes|boolean';
 
         // If roles are provided, validate them
         if ($this->has('roles')) {
@@ -50,6 +46,14 @@ class UserRequest extends FormRequest
 
         // Return the validation 
         return $rules;
+    }
+
+    protected function prepareForValidation(): void
+    {
+        if($this->name) return;
+        $this->merge([
+            'name' => $this->owner_name,
+        ]);
     }
 
     /**

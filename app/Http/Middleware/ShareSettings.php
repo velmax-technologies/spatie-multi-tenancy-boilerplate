@@ -18,6 +18,8 @@ class ShareSettings
     public function handle(Request $request, Closure $next): Response
     {
         View::share('theme', app(GeneralSettings::class)->theme);
+        View::share('workspace_host', app(GeneralSettings::class)->workspace_host);
+
 
         return $next($request);
     }

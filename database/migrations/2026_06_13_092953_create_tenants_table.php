@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('slug')->unique();
 
             // personal & contact
-            $table->string('name');
+            $table->string('owner_name');
+            $table->string('username')->unique();
             $table->string('email')->unique()->nullable();
             $table->string('phone')->unique()->nullable();
 
@@ -28,6 +29,10 @@ return new class extends Migration
             $table->integer('database_port')->default(3306);
             $table->string('database_username')->nullable();
             $table->string('database_password')->nullable();
+
+            // subdomain
+            $table->string('subdomain')->unique();
+
             
             // status
             $table->boolean('is_active')->default(false);

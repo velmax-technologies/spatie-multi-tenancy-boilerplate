@@ -17,9 +17,14 @@ class TenantRolesAndPermissionsSeeder extends Seeder
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
         // Tenant Roles & Permissions
-        $tenant = Role::create(['name' => 'tenant']);
-        $admin = Role::create(['name' => 'admin']);
-        $cashier = Role::create(['name' => 'cashier']);
+        Role::create(['name' => 'tenant', 'guard_name' => 'web']);
+        Role::create(['name' => 'tenant', 'guard_name' => 'sanctum']);
+
+        Role::create(['name' => 'admin', 'guard_name' => 'web']);
+        Role::create(['name' => 'admin', 'guard_name' => 'sanctum']);
+
+        Role::create(['name' => 'cashier', 'guard_name' => 'web']);
+        Role::create(['name' => 'cashier', 'guard_name' => 'sanctum']);
             
     }
 }

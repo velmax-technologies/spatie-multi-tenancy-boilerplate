@@ -6,7 +6,7 @@ return new class extends SettingsMigration
 {
     public function up(): void
     {
-        $this->migrator->add('platform_feature.registration', false);
+        $this->migrator->add('platform_feature.registration', true);
         $this->migrator->add('platform_feature.trial', true);
     }
 };

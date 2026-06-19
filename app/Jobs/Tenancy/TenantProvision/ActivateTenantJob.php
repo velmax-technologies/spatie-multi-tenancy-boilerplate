@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Jobs\TenantProvision;
+namespace App\Jobs\Tenancy\TenantProvision;
 
 use App\Models\Tenant;
 use Illuminate\Foundation\Queue\Queueable;
@@ -31,5 +31,7 @@ class ActivateTenantJob implements ShouldQueue
         ]);
 
         $this->tenant->forgetCurrent();
+        logger()->info("Tenant Admin activated");
+
     }
 }

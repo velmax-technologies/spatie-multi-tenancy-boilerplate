@@ -27,7 +27,9 @@ abstract class CrudController extends Controller
     public function store(){
         $request = app($this->formRequest)->validated();
         $model = $this->model::create($request);
+        $this->afterStore($model, $request);
         return (new $this->jsonResource($model))->additional($this->preparedResponse('store'));
+
     }
 
     public function update(int $id){
@@ -43,10 +45,7 @@ abstract class CrudController extends Controller
         $model->delete();
         return (new $this->jsonResource($model))->additional($this->preparedResponse('destroy'));
     }
-    
 
-    // hooks
-    protected function afterStore(Model $record, FormRequest $request): void {}
-    protected function afterUpdate(Model $record, FormRequest $request): void {}
-    protected function afterDestroy(Model $record, FormRequest $request): void {}
+    // custom hooks
+    public function afterStore(Model $model, array $request){}
 }

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Jobs\TenantProvision;
+namespace App\Jobs\Tenancy\TenantProvision;
 
 use App\Models\Tenant;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class SeedTenantDatabaseJob implements ShouldQueue
+class RunTenantMigrationsJob implements ShouldQueue
 {
     use Queueable;
 
@@ -24,15 +24,19 @@ class SeedTenantDatabaseJob implements ShouldQueue
      */
     public function handle(): void
     {
-         // Make tenant current
+        // Make tenant current
         $this->tenant->makeCurrent();
 
-        // Seed tenant database
+        // Run tenant migrations
         Artisan::call('tenants:artisan', [
-            'artisanCommand' => 'db:seed --class=TenantDatabaseSeeder --force',
+            'artisanCommand' => "migrate --path=database/migrations/tenant",
             '--tenant' => [$this->tenant->id],
         ]);
 
         $this->tenant->forgetCurrent();
+
+        logger()->info("Tenant migrations completed");
+
+
     }
 }

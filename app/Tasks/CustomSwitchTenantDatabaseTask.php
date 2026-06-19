@@ -21,5 +21,8 @@ class CustomSwitchTenantDatabaseTask extends SwitchTenantDatabaseTask
     public function forgetCurrent(): void
     {
         DB::purge('mariadb');
+        // config([
+        //     'database.connections.mariadb.database' => 'spatie_multi_tenancy',
+        // ]);
     }
 }

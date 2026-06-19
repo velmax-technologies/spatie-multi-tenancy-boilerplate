@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Jobs\TenantDelete;
+namespace App\Jobs\Tenancy\TenantDelete;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Queue\Queueable;

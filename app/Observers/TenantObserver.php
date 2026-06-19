@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use Throwable;
 use App\Models\User;
 use App\Models\Tenant;
 use App\Jobs\ProvisionTenantJob;
@@ -24,14 +25,7 @@ class TenantObserver
      */
      public function created(Tenant $tenant)
     {
-        Bus::chain([
-            new CreateTenantDatabaseJob($tenant->database),
-            new RunTenantMigrationsJob($tenant),
-            new SeedTenantDatabaseJob($tenant),
-            new CreateTenantAdminJob($tenant),
-            new ActivateTenantJob($tenant),
-        ])->dispatch();
-        
+                
     }
 
     /**

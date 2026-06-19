@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Jobs\TenantProvision;
+namespace App\Jobs\Tenancy\TenantProvision;
 
 use App\Models\Tenant;
 use Illuminate\Support\Facades\DB;

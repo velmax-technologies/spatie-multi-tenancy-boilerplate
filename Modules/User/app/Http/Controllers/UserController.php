@@ -1,9 +1,10 @@
 <?php
-
 namespace Modules\User\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Model;
 use App\Http\Controllers\CrudController;
@@ -18,18 +19,15 @@ class UserController extends CrudController
         $this->jsonResource = UserResource::class;
         $this->formRequest = UserRequest::class;
      }
-    
-    protected function afterStore(Model $record, FormRequest $request): void
-    {
-        if ($request->filled('roles')) {
-            $record->syncRoles($request->roles);
-        }
-    }
 
-    protected function afterUpdate(Model $record, FormRequest $request): void
-    {
-        if ($request->filled('roles')) {
-            $record->syncRoles($request->roles);
+    public function afterStore(Model $model, array $request): void {
+        $model->syncRoles([]); // remove all assigne roles
+
+        foreach (request()->roles as $role) {
+            $user_role = Role::findByName($role, 'sanctum');
+            $model->assignRole($user_role);
+            $user_role = Role::findByName($role, 'web');
+            $model->assignRole($user_role);
         }
-    }
+    }   
 }

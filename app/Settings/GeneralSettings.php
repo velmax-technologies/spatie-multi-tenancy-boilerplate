@@ -16,6 +16,8 @@ class GeneralSettings extends Settings
     public int $default_plan_id;
 
     public string $theme;
+    
+    public string $workspace_host;
 
     public static function group(): string
     {
